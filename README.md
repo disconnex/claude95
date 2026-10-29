@@ -184,6 +184,11 @@ See [CHANGELOG.md](CHANGELOG.md) for what changed in each version.
 Ideas, bug reports and pull requests are welcome, especially from anyone
 with real 90s hardware to test on. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
+Come chat about it, or about anything retro: **##nocarrier** on Libera.Chat,
+a 90s BBS-style channel where the author hangs out on the same Pentium 166.
+[Join in your browser](https://web.libera.chat/##nocarrier) or see the
+board's homepage at <https://disconnex.github.io/nocarrier/>.
+
 ## License
 
 MIT; see [LICENSE](LICENSE). Claude is a product of Anthropic; this is an
