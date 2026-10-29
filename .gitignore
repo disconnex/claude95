@@ -1,0 +1,10 @@
+build/
+claude95.env
+CLAUDE95.INI
+*.env
+*.exe
+*.o
+*.pyc
+__pycache__/
+*.res
+*.zip

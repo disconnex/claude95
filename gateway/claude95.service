@@ -1,0 +1,30 @@
+[Unit]
+Description=claude95 gateway: Claude for a Windows 95 PC (github.com/disconnex/claude95)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=claude95
+Group=claude95
+EnvironmentFile=/etc/claude95/claude95.env
+StateDirectory=claude95
+StateDirectoryMode=0700
+WorkingDirectory=/var/lib/claude95
+ExecStart=/opt/claude95/venv/bin/python /opt/claude95/claude95d.py
+Restart=on-failure
+RestartSec=30
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictNamespaces=yes
+LockPersonality=yes
+MemoryMax=256M
+
+[Install]
+WantedBy=multi-user.target

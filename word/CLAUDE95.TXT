@@ -1,0 +1,132 @@
+Claude 95 macros for Word 95 (WordBasic)
+=========================================
+
+Each block below is one macro. Create each with Tools > Macro: type the
+name, click Create, replace everything in the window with the block's
+lines (from Sub MAIN to End Sub), then File > Close and save. See
+README.md in this folder for the full steps.
+
+Claude 95 must have been run at least once, so it can tell Word where it
+lives (it writes [Claude95] Path= into WIN.INI).
+
+---- ClaudeAssist: Opens the Writing Assist window with the selected text.
+
+Sub MAIN
+exe$ = GetProfileString$("Claude95", "Path")
+If exe$ = "" Then
+	MsgBox "Run Claude 95 once first, so Word can find it.", "Claude 95", 48
+	Goto Bye
+End If
+If SelType() = 2 Then
+	EditCopy
+	Shell exe$ + " /assist ask /clip"
+Else
+	Shell exe$ + " /assist ask"
+End If
+Bye:
+End Sub
+
+---- ClaudeRewrite: Rewrites the selection so it reads better.
+
+Sub MAIN
+exe$ = GetProfileString$("Claude95", "Path")
+If exe$ = "" Then
+	MsgBox "Run Claude 95 once first, so Word can find it.", "Claude 95", 48
+	Goto Bye
+End If
+If SelType() = 2 Then
+	EditCopy
+	Shell exe$ + " /assist rewrite /clip"
+Else
+	Shell exe$ + " /assist rewrite"
+End If
+Bye:
+End Sub
+
+---- ClaudeProofread: Fixes spelling, grammar and punctuation.
+
+Sub MAIN
+exe$ = GetProfileString$("Claude95", "Path")
+If exe$ = "" Then
+	MsgBox "Run Claude 95 once first, so Word can find it.", "Claude 95", 48
+	Goto Bye
+End If
+If SelType() = 2 Then
+	EditCopy
+	Shell exe$ + " /assist proofread /clip"
+Else
+	Shell exe$ + " /assist proofread"
+End If
+Bye:
+End Sub
+
+---- ClaudeShorter: Makes the selection shorter.
+
+Sub MAIN
+exe$ = GetProfileString$("Claude95", "Path")
+If exe$ = "" Then
+	MsgBox "Run Claude 95 once first, so Word can find it.", "Claude 95", 48
+	Goto Bye
+End If
+If SelType() = 2 Then
+	EditCopy
+	Shell exe$ + " /assist shorter /clip"
+Else
+	Shell exe$ + " /assist shorter"
+End If
+Bye:
+End Sub
+
+---- ClaudeSummarize: Summarizes the selection.
+
+Sub MAIN
+exe$ = GetProfileString$("Claude95", "Path")
+If exe$ = "" Then
+	MsgBox "Run Claude 95 once first, so Word can find it.", "Claude 95", 48
+	Goto Bye
+End If
+If SelType() = 2 Then
+	EditCopy
+	Shell exe$ + " /assist summarize /clip"
+Else
+	Shell exe$ + " /assist summarize"
+End If
+Bye:
+End Sub
+
+---- ClaudeContinue: Continues writing from the selection.
+
+Sub MAIN
+exe$ = GetProfileString$("Claude95", "Path")
+If exe$ = "" Then
+	MsgBox "Run Claude 95 once first, so Word can find it.", "Claude 95", 48
+	Goto Bye
+End If
+If SelType() = 2 Then
+	EditCopy
+	Shell exe$ + " /assist continue /clip"
+Else
+	Shell exe$ + " /assist continue"
+End If
+Bye:
+End Sub
+
+---- ClaudeInstallMenu: adds a Claude menu to Word's menu bar for the
+     macros above. Create the other macros first, run this once, then
+     delete it if you like.
+
+Sub MAIN
+On Error Goto Failed
+ToolsCustomizeMenuBar .Context = 0, .Position = -1, .MenuText = "&Claude", .Add
+ToolsCustomizeMenus .MenuType = 0, .Position = -1, .Category = 2, .Name = "ClaudeAssist", .Menu = "&Claude", .MenuText = "&Writing Assist...", .Context = 0, .Add
+ToolsCustomizeMenus .MenuType = 0, .Position = -1, .Category = 2, .Name = "ClaudeRewrite", .Menu = "&Claude", .MenuText = "&Rewrite", .Context = 0, .Add
+ToolsCustomizeMenus .MenuType = 0, .Position = -1, .Category = 2, .Name = "ClaudeProofread", .Menu = "&Claude", .MenuText = "&Proofread", .Context = 0, .Add
+ToolsCustomizeMenus .MenuType = 0, .Position = -1, .Category = 2, .Name = "ClaudeShorter", .Menu = "&Claude", .MenuText = "Make &Shorter", .Context = 0, .Add
+ToolsCustomizeMenus .MenuType = 0, .Position = -1, .Category = 2, .Name = "ClaudeSummarize", .Menu = "&Claude", .MenuText = "S&ummarize", .Context = 0, .Add
+ToolsCustomizeMenus .MenuType = 0, .Position = -1, .Category = 2, .Name = "ClaudeContinue", .Menu = "&Claude", .MenuText = "&Continue Writing", .Context = 0, .Add
+MsgBox "The Claude menu is ready.", "Claude 95", 64
+Goto Bye
+Failed:
+MsgBox "Couldn't add the menu automatically. Use Tools > Customize > Menus instead (see README.md).", "Claude 95", 48
+Bye:
+End Sub
